@@ -1,6 +1,6 @@
 # 🦁 Animal Classifier
 
-A general-purpose **animal image classification** repository. The backend is a Flask API powered by PyTorch for deep learning inference. The frontend (coming soon) will use Next.js, Tailwind CSS, and will be deployed soon.
+A general-purpose **animal image classification** repository. The backend is a Flask API powered by PyTorch for deep learning inference. The frontend (coming soon) will use Next.js, Tailwind CSS, a[...]
 
 ---
 
