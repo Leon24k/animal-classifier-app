@@ -58,7 +58,7 @@ const featuredAnimals: Animal[] = [
 ];
 
 export default function AnimalGallery() {
-  const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
+  const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null as Animal | null);
 
   return (
     <section className="py-16 px-4 bg-muted/30">
