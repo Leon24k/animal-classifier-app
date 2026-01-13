@@ -1,16 +1,58 @@
-import Image from 'next/image';
+'use client';
 
-// Sample of featured animals with beautiful stock photos
+import Image from 'next/image';
+import { useState } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+
+// Sample of featured animals with beautiful stock photos and information
 const featuredAnimals = [
-  { name: 'Lion', image: 'https://images.pexels.com/photos/33045/lion-wild-africa-african.jpg' },
-  { name: 'Tiger', image: 'https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg' },
-  { name: 'Elephant', image: 'https://images.pexels.com/photos/66898/elephant-cub-tsavo-kenya-66898.jpeg' },
-  { name: 'Giraffe', image: 'https://images.pexels.com/photos/1319515/pexels-photo-1319515.jpeg' },
-  { name: 'Zebra', image: 'https://images.pexels.com/photos/750539/pexels-photo-750539.jpeg' },
-  { name: 'Panda', image: 'https://images.pexels.com/photos/1181181/pexels-photo-1181181.jpeg' },
+  { 
+    name: 'Lion', 
+    image: 'https://images.pexels.com/photos/33045/lion-wild-africa-african.jpg',
+    description: 'The King of the Jungle',
+    info: 'Lions are large feline carnivores known for their majestic manes. They are social animals that live in prides and are found primarily in African savannas. Male lions can weigh up to 250kg and are known for their powerful roars that can be heard up to 9km away.'
+  },
+  { 
+    name: 'Tiger', 
+    image: 'https://images.pexels.com/photos/145939/pexels-photo-145939.jpeg',
+    description: 'Striped Predator',
+    info: 'Tigers are the largest cats in the world with distinctive orange and black stripes. They are solitary hunters and are found primarily in Asia. Each tiger has a unique stripe pattern, much like human fingerprints.'
+  },
+  { 
+    name: 'Elephant', 
+    image: 'https://images.pexels.com/photos/66898/elephant-cub-tsavo-kenya-66898.jpeg',
+    description: 'The Gentle Giant',
+    info: 'Elephants are the largest land animals and are known for their intelligence and memory. They have a complex social structure and communicate through infrasound frequencies. Elephants can live up to 70 years in the wild.'
+  },
+  { 
+    name: 'Giraffe', 
+    image: 'https://images.pexels.com/photos/1319515/pexels-photo-1319515.jpeg',
+    description: 'Tallest Land Animal',
+    info: 'Giraffes can reach heights of up to 5.5 meters (18 feet) and are the tallest land animals. Their long necks and legs are perfectly adapted for reaching leaves high in acacia trees. They are found in African savannas and are herbivores.'
+  },
+  { 
+    name: 'Zebra', 
+    image: 'https://images.pexels.com/photos/750539/pexels-photo-750539.jpeg',
+    description: 'Striped Equine',
+    info: 'Zebras are wild equines native to Africa, recognizable by their distinctive black and white stripes. Each zebra has a unique stripe pattern. These herbivores live in herds and are prey animals for lions and other predators.'
+  },
+  { 
+    name: 'Panda', 
+    image: 'https://images.pexels.com/photos/3608263/pexels-photo-3608263.jpeg',
+    description: 'Gentle Bear',
+    info: 'Giant pandas are endangered bears native to central China. Despite being carnivores, they primarily eat bamboo, consuming up to 40kg per day. They are symbols of wildlife conservation and are known for their playful and gentle nature.'
+  },
 ];
 
 export default function AnimalGallery() {
+  const [selectedAnimal, setSelectedAnimal] = useState(null);
+
   return (
     <section className="py-16 px-4 bg-muted/30">
       <div className="container mx-auto">
@@ -25,7 +67,8 @@ export default function AnimalGallery() {
           {featuredAnimals.map((animal, index) => (
             <div 
               key={index}
-              className="group relative overflow-hidden rounded-lg aspect-[4/3] shadow-md transition-all duration-500 hover:shadow-xl"
+              onClick={() => setSelectedAnimal(animal)}
+              className="group relative overflow-hidden rounded-lg aspect-[4/3] shadow-md transition-all duration-500 hover:shadow-xl cursor-pointer"
             >
               <Image
                 src={animal.image}
@@ -43,6 +86,36 @@ export default function AnimalGallery() {
             </div>
           ))}
         </div>
+
+        {/* Animal Information Dialog */}
+        <Dialog open={!!selectedAnimal} onOpenChange={() => setSelectedAnimal(null)}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle className="text-2xl">{selectedAnimal?.name}</DialogTitle>
+              <DialogDescription className="text-base">{selectedAnimal?.description}</DialogDescription>
+            </DialogHeader>
+            
+            <div className="space-y-4">
+              <div className="relative w-full h-64 rounded-lg overflow-hidden">
+                {selectedAnimal && (
+                  <Image
+                    src={selectedAnimal.image}
+                    alt={selectedAnimal.name}
+                    fill
+                    className="object-cover"
+                  />
+                )}
+              </div>
+              
+              <div className="space-y-2">
+                <h3 className="font-semibold text-lg">About</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {selectedAnimal?.info}
+                </p>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
         
         <div className="mt-10 text-center">
           <p className="text-muted-foreground">
