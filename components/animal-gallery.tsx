@@ -10,8 +10,15 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 
+interface Animal {
+  name: string;
+  image: string;
+  description: string;
+  info: string;
+}
+
 // Sample of featured animals with beautiful stock photos and information
-const featuredAnimals = [
+const featuredAnimals: Animal[] = [
   { 
     name: 'Lion', 
     image: 'https://images.pexels.com/photos/33045/lion-wild-africa-african.jpg',
@@ -51,7 +58,7 @@ const featuredAnimals = [
 ];
 
 export default function AnimalGallery() {
-  const [selectedAnimal, setSelectedAnimal] = useState(null);
+  const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
 
   return (
     <section className="py-16 px-4 bg-muted/30">
