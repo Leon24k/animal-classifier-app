@@ -23,7 +23,7 @@ export default function HeroSection() {
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground max-w-prose">
-                Our advanced AI can identify 90 different animal species from a single image.
+                Our AI can identify 90 different animal species from a single image.
                 Upload a photo and instantly get detailed information about the animal.
               </p>
               
